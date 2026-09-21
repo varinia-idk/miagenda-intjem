@@ -29,10 +29,15 @@ public final class MainActivity extends AppCompatActivity {
         aboutButton = findViewById(R.id.aboutButton);
     }
 
-    /** Demonstrates how Java resolves string, color and dimension resources. */
+    /**
+     * Demonstrates how Java resolves string, color and dimension resources.
+     * It re-applies the very same resources the layout already declares, so the
+     * rendered result does not depend on whether XML or Java wins. The welcome
+     * panel is a primary container, so its text uses the matching on-role color.
+     */
     private void applyResources() {
         String welcomeMessage = getString(R.string.welcome_message);
-        int textColor = ContextCompat.getColor(this, R.color.md_on_surface);
+        int textColor = ContextCompat.getColor(this, R.color.md_on_primary_container);
         int padding = getResources().getDimensionPixelSize(R.dimen.spacing_medium);
 
         welcomeText.setText(welcomeMessage);
