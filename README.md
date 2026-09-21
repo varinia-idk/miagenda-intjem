@@ -52,4 +52,10 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 - [Guía explicada](docs/Guia_3.8_Componentes_Avanzados_EXPLICADA.pdf)
 - [Capturas verificadas](docs/captures/3.8/)
 
-La historia de Git de este repositorio conserva los commits de la práctica 3.7 para demostrar que 3.8 es una continuación del mismo proyecto.
+## Ubicación en el repositorio
+
+Este proyecto vive en la rama `main` y es la versión ejecutable de la entrega. La rama
+`practica-3.7` conserva el proyecto tal como se entregó en la guía anterior.
+
+La historia de Git de esta rama arranca con los cuatro commits de la práctica 3.7, de modo
+que 3.8 queda demostrada como una continuación del mismo proyecto y no como un proyecto nuevo.
