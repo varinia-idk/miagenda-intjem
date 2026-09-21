@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header_title">Academic planner</string>
+    <string name="welcome_message">Welcome to the system. Keep your tasks, subjects, and due dates in one place.</string>
+    <string name="open_agenda_button">Open planner</string>
+    <string name="about_button">About</string>
+
+    <string name="agenda_icon_description">Academic planner icon</string>
+
+    <string name="opening_agenda_message">Opening the planner…</string>
+    <string name="about_message">%1$s · version 1.0 · Section 3.7</string>
+</resources>

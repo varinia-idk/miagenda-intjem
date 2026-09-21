@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">MiAgenda INTJEM</string>
+
+    <string name="header_title">Agenda académica</string>
+    <string name="welcome_message">Bienvenido al sistema. Organiza tus tareas, materias y fechas de entrega en un solo lugar.</string>
+    <string name="open_agenda_button">Abrir agenda</string>
+    <string name="about_button">Acerca de</string>
+
+    <string name="agenda_icon_description">Ícono de una agenda académica</string>
+
+    <string name="opening_agenda_message">Abriendo la agenda…</string>
+    <string name="about_message">%1$s · versión 1.0 · Punto 3.7</string>
+</resources>

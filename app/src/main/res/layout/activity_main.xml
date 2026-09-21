@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/screen_margin"
+    tools:background="@color/md_surface"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/headerText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/header_title"
+        android:textAppearance="@style/TextAppearance.MiAgenda.Title"
+        android:textColor="@color/md_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/agendaImage"
+        android:layout_width="@dimen/agenda_image_size"
+        android:layout_height="@dimen/agenda_image_size"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:contentDescription="@string/agenda_icon_description"
+        android:src="@drawable/ic_agenda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerText" />
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:background="@drawable/welcome_panel"
+        android:gravity="center"
+        android:padding="@dimen/spacing_medium"
+        android:text="@string/welcome_message"
+        android:textAppearance="@style/TextAppearance.MiAgenda.Body"
+        android:textColor="@color/md_on_primary_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/agendaImage" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/openAgendaButton"
+        style="@style/EstiloBotonPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:text="@string/open_agenda_button"
+        app:layout_constraintEnd_toStartOf="@id/aboutButton"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcomeText" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/aboutButton"
+        style="@style/EstiloBotonPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:text="@string/about_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/openAgendaButton"
+        app:layout_constraintTop_toTopOf="@id/openAgendaButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
