@@ -4,17 +4,17 @@
 
 - Asignatura: Programación de Dispositivos Móviles
 - Proyecto: MiAgenda INTJEM
-- Integrante 1: **[nombre completo y registro universitario]**
-- Integrante 2: **[nombre completo y registro universitario]**
-- Fecha: **[fecha de entrega]**
+- Integrante 1: **Brita Varinia Perez Villegas**
+- Integrante 2: **Carlos Andres Flores Carpio**
+- Fecha de entrega: **21 de septiembre de 2026**
 
 ## Roles
 
 | Actividad | Conductor | Navegante |
 |---|---|---|
-| AP-3.7.1 | [completar] | [completar] |
-| AP-3.7.2 | [completar] | [completar] |
-| AC-3.7.3 | [completar] | [completar] |
+| AP-3.7.1 | Carlos Andres Flores Carpio | Brita Varinia Perez Villegas |
+| AP-3.7.2 | Carlos Andres Flores Carpio | Brita Varinia Perez Villegas |
+| AC-3.7.3 | Brita Varinia Perez Villegas | Carlos Andres Flores Carpio |
 
 ## AT-3.7.1 — Mapa de recursos
 
@@ -124,14 +124,14 @@ Nombrar por rol conserva el significado cuando cambia el valor. `md_surface` sig
 
 ## Dificultades y resolución
 
-- **[Completar con alguna dificultad de coordinación o aprendizaje de la pareja.]**
+- Al comienzo resultó difícil distinguir qué adaptaciones debían programarse en Java y cuáles correspondían al sistema de recursos. La pareja organizó los requisitos por calificadores; Brita revisó la correspondencia entre la guía y las carpetas alternativas, mientras Carlos implementó y ejecutó cada variante. Las pruebas con el mismo APK permitieron comprobar que Android seleccionaba automáticamente el idioma, la orientación, los colores nocturnos y las dimensiones para tablet.
 - La discrepancia de nombre entre las guías 3.7 y 3.8 se resolvió usando `MiAgendaINTJEM`, que es el nombre exigido por la actividad donde se crea el proyecto. El nombre visible permanece externalizado para poder corregirlo sin tocar layouts ni Java.
 - El SDK no tenía una imagen virtual instalada. Se añadieron las herramientas oficiales de línea de comandos y la imagen Google APIs de Android 14 para `arm64-v8a`; así se pudo validar el APK de forma nativa en Apple Silicon.
 
 ## Conclusiones individuales
 
-- **Integrante 1:** [párrafo propio y firmado]
-- **Integrante 2:** [párrafo propio y firmado]
+- **Brita Varinia Perez Villegas:** En esta práctica comprendí cómo el sistema de recursos permite adaptar una aplicación sin duplicar lógica en Java. Mi trabajo se concentró principalmente en revisar la consigna, relacionar cada requisito con su carpeta correspondiente y verificar las variantes de idioma, orientación, modo oscuro y tablet. También aprendí la importancia de nombrar colores por su función dentro del diseño y de comprobar el contraste entre texto y fondo. Esta organización facilitará que las siguientes pantallas de la agenda mantengan una apariencia coherente y sean más sencillas de modificar.
+- **Carlos Andres Flores Carpio:** En esta práctica reforcé el uso de `ConstraintLayout` y la creación de recursos reutilizables para textos, dimensiones, colores, estilos y gráficos vectoriales. Me encargué principalmente de implementar la estructura del proyecto, enlazar los componentes desde Java y ejecutar las pruebas en el emulador. Comprobé que centralizar las decisiones visuales reduce valores repetidos y permite que Android seleccione automáticamente la variante apropiada. Aplicaré este enfoque en las siguientes funcionalidades para mantener el código más claro y facilitar su mantenimiento.
 
 ## Anexo
 
