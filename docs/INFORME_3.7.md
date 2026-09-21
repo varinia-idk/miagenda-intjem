@@ -4,8 +4,8 @@
 
 - Asignatura: Programación de Dispositivos Móviles
 - Proyecto: MiAgenda INTJEM
-- Integrante 1: **Brita Varinia Perez Villegas** — Registro universitario: `(completar)`
-- Integrante 2: **Carlos Andres Flores Carpio** — Registro universitario: `(completar)`
+- Integrante 1: **Brita Varinia Perez Villegas**
+- Integrante 2: **Carlos Andres Flores Carpio**
 - Fecha de entrega: **21 de septiembre de 2026**
 
 ## Roles
