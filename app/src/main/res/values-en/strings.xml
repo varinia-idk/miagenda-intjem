@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="header_title">Academic planner</string>
-    <string name="welcome_message">Welcome to the system. Keep your tasks, subjects, and due dates in one place.</string>
-    <string name="open_agenda_button">Open planner</string>
-    <string name="about_button">About</string>
+    <string name="toolbar_title">MiAgenda · Components 3.8</string>
+    <string name="about_message">%1$s · version 2.0 · Section 3.8</string>
 
-    <string name="agenda_icon_description">Academic planner icon</string>
+    <string name="section_tasks">Tasks</string>
+    <string name="section_calendar">Calendar</string>
+    <string name="section_profile">Profile</string>
+    <string name="action_about">About</string>
 
-    <string name="opening_agenda_message">Opening the planner…</string>
-    <string name="about_message">%1$s · version 1.0 · Section 3.7</string>
+    <string name="filter_label">Filter by subject</string>
+    <string name="filter_all_subjects">All subjects</string>
+    <string name="new_task">New task</string>
+    <string name="new_task_description">Add an academic task</string>
+    <string name="task_title_field">Title</string>
+    <string name="task_due_date_field">Due date</string>
+    <string name="task_subject_field">Subject</string>
+    <string name="task_priority_field">Priority</string>
+    <string name="task_due_date_format">Due: %1$s</string>
+    <string name="priority_indicator_description">%1$s priority</string>
+    <string name="selected_task_message">Selected: %1$s</string>
+    <string name="task_added_message">Task added</string>
+    <string name="task_updated_message">Task updated</string>
+    <string name="task_deleted_message">Task deleted</string>
+    <string name="empty_title_error">The title cannot be empty</string>
+    <string name="empty_date_error">The date cannot be empty</string>
+
+    <string name="delete_task_title">Delete task</string>
+    <string name="delete_task_message">Do you want to delete “%1$s”?</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+
+    <string name="detail_title">Task details</string>
+    <string name="detail_subject_format">Subject: %1$s</string>
+    <string name="detail_due_date_format">Due date: %1$s</string>
+    <string name="detail_priority_format">Priority: %1$s</string>
+    <string name="action_save_changes">Save changes</string>
+    <string name="action_share">Share</string>
+    <string name="share_subject">Task: %1$s</string>
+    <string name="share_body">Task: %1$s\nSubject: %2$s\nDue: %3$s\nPriority: %4$s</string>
+    <string name="share_chooser_title">Share task with…</string>
+    <string name="priority_low_label">Low</string>
+    <string name="priority_medium_label">Medium</string>
+    <string name="priority_high_label">High</string>
+
+    <string name="subject_mobile">Mobile Device Programming</string>
+    <string name="subject_database">Database II</string>
+    <string name="subject_software">Software Engineering</string>
+    <string name="subject_networks">Computer Networks</string>
+
+    <string name="sample_task_1">Prepare the RecyclerView presentation</string>
+    <string name="sample_task_2">Implement Fragment navigation</string>
+    <string name="sample_task_3">Submit the database report</string>
+    <string name="sample_task_4">Review UML diagrams</string>
+    <string name="sample_task_5">Configure the networking lab</string>
+    <string name="sample_task_6">Rehearse the technical defense</string>
+    <string name="sample_task_7">Fix unit tests</string>
+    <string name="sample_task_8">Document Android components</string>
+
+    <string name="calendar_title">Academic calendar</string>
+    <string name="calendar_body">Check upcoming due dates in the task list.</string>
+    <string name="calendar_next_delivery">Next due date: September 21</string>
+    <string name="profile_title">Project team</string>
+    <string name="profile_brita">Brita Varinia Perez Villegas · Driver</string>
+    <string name="profile_carlos">Carlos Andres Flores Carpio · Navigator</string>
+    <string name="profile_body">Practice 3.8 · RecyclerView, Intents, and Fragments</string>
+
+    <string name="notification_channel_name">High-priority tasks</string>
+    <string name="notification_channel_description">Alerts for new urgent academic tasks</string>
+    <string name="notification_title">New priority task</string>
+    <string name="notification_body">%1$s · %2$s</string>
 </resources>

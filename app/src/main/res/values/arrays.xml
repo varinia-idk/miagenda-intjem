@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="subjects">
+        <item>@string/subject_mobile</item>
+        <item>@string/subject_database</item>
+        <item>@string/subject_software</item>
+        <item>@string/subject_networks</item>
+    </string-array>
+
+    <string-array name="subject_filters">
+        <item>@string/filter_all_subjects</item>
+        <item>@string/subject_mobile</item>
+        <item>@string/subject_database</item>
+        <item>@string/subject_software</item>
+        <item>@string/subject_networks</item>
+    </string-array>
+
+    <string-array name="priorities">
+        <item>@string/priority_low_label</item>
+        <item>@string/priority_medium_label</item>
+        <item>@string/priority_high_label</item>
+    </string-array>
+</resources>

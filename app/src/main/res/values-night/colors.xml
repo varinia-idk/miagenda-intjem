@@ -21,5 +21,9 @@
     <color name="md_error_container">#93000A</color>
     <color name="md_on_error_container">#FFDAD6</color>
 
+    <color name="priority_low">#58DBA4</color>
+    <color name="priority_medium">#F0C048</color>
+    <color name="priority_high">#FFB4AB</color>
+
     <color name="launcher_background">#0B5FA5</color>
 </resources>

@@ -12,7 +12,6 @@
     <dimen name="button_elevation">2dp</dimen>
 
     <dimen name="button_height">48dp</dimen>
-    <dimen name="agenda_image_size">120dp</dimen>
     <dimen name="vector_intrinsic_size">24dp</dimen>
 
     <dimen name="text_display">36sp</dimen>
@@ -20,4 +19,12 @@
     <dimen name="text_title">24sp</dimen>
     <dimen name="text_body">16sp</dimen>
     <dimen name="text_label">16sp</dimen>
+
+    <dimen name="toolbar_elevation">2dp</dimen>
+    <dimen name="task_card_elevation">1dp</dimen>
+    <dimen name="priority_indicator_width">6dp</dimen>
+    <dimen name="task_list_bottom_padding">96dp</dimen>
+    <dimen name="bottom_navigation_height">80dp</dimen>
+    <dimen name="detail_button_spacing">12dp</dimen>
+    <dimen name="empty_state_icon_size">72dp</dimen>
 </resources>

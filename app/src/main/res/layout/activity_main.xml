@@ -6,70 +6,39 @@
     android:id="@+id/mainRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/screen_margin"
-    tools:background="@color/md_surface"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/headerText"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/header_title"
-        android:textAppearance="@style/TextAppearance.MiAgenda.Title"
-        android:textColor="@color/md_primary"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        android:elevation="@dimen/toolbar_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/toolbar_title"
+        app:titleTextColor="?attr/colorOnSurface" />
 
-    <ImageView
-        android:id="@+id/agendaImage"
-        android:layout_width="@dimen/agenda_image_size"
-        android:layout_height="@dimen/agenda_image_size"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:contentDescription="@string/agenda_icon_description"
-        android:src="@drawable/ic_agenda"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerText" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <TextView
-        android:id="@+id/welcomeText"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:background="@drawable/welcome_panel"
-        android:gravity="center"
-        android:padding="@dimen/spacing_medium"
-        android:text="@string/welcome_message"
-        android:textAppearance="@style/TextAppearance.MiAgenda.Body"
-        android:textColor="@color/md_on_primary_container"
+        android:layout_height="@dimen/bottom_navigation_height"
+        android:background="?attr/colorSurface"
+        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/agendaImage" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/openAgendaButton"
-        style="@style/EstiloBotonPrincipal"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:text="@string/open_agenda_button"
-        app:layout_constraintEnd_toStartOf="@id/aboutButton"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeText" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/aboutButton"
-        style="@style/EstiloBotonPrincipal"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/spacing_small"
-        android:text="@string/about_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/openAgendaButton"
-        app:layout_constraintTop_toTopOf="@id/openAgendaButton" />
+        app:menu="@menu/menu_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

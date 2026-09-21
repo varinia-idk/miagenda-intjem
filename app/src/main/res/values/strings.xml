@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">MiAgenda INTJEM</string>
+    <string name="toolbar_title">MiAgenda · Componentes 3.8</string>
+    <string name="about_message">%1$s · versión 2.0 · Punto 3.8</string>
 
-    <string name="header_title">Agenda académica</string>
-    <string name="welcome_message">Bienvenido al sistema. Organiza tus tareas, materias y fechas de entrega en un solo lugar.</string>
-    <string name="open_agenda_button">Abrir agenda</string>
-    <string name="about_button">Acerca de</string>
+    <string name="section_tasks">Tareas</string>
+    <string name="section_calendar">Calendario</string>
+    <string name="section_profile">Perfil</string>
+    <string name="action_about">Acerca de</string>
 
-    <string name="agenda_icon_description">Ícono de una agenda académica</string>
+    <string name="filter_label">Filtrar por materia</string>
+    <string name="filter_all_subjects">Todas las materias</string>
+    <string name="new_task">Nueva tarea</string>
+    <string name="new_task_description">Agregar una tarea académica</string>
+    <string name="task_title_field">Título</string>
+    <string name="task_due_date_field">Fecha de entrega</string>
+    <string name="task_subject_field">Materia</string>
+    <string name="task_priority_field">Prioridad</string>
+    <string name="task_due_date_format">Entrega: %1$s</string>
+    <string name="priority_indicator_description">Prioridad %1$s</string>
+    <string name="selected_task_message">Seleccionada: %1$s</string>
+    <string name="task_added_message">Tarea agregada</string>
+    <string name="task_updated_message">Tarea actualizada</string>
+    <string name="task_deleted_message">Tarea eliminada</string>
+    <string name="empty_title_error">El título no puede estar vacío</string>
+    <string name="empty_date_error">La fecha no puede estar vacía</string>
 
-    <string name="opening_agenda_message">Abriendo la agenda…</string>
-    <string name="about_message">%1$s · versión 1.0 · Punto 3.7</string>
+    <string name="delete_task_title">Eliminar tarea</string>
+    <string name="delete_task_message">¿Deseas eliminar “%1$s”?</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_save">Guardar</string>
+
+    <string name="detail_title">Detalle de la tarea</string>
+    <string name="detail_subject_format">Materia: %1$s</string>
+    <string name="detail_due_date_format">Fecha de entrega: %1$s</string>
+    <string name="detail_priority_format">Prioridad: %1$s</string>
+    <string name="action_save_changes">Guardar cambios</string>
+    <string name="action_share">Compartir</string>
+    <string name="share_subject">Tarea: %1$s</string>
+    <string name="share_body">Tarea: %1$s\nMateria: %2$s\nEntrega: %3$s\nPrioridad: %4$s</string>
+    <string name="share_chooser_title">Compartir tarea mediante…</string>
+
+    <string name="priority_low_label">Baja</string>
+    <string name="priority_medium_label">Media</string>
+    <string name="priority_high_label">Alta</string>
+
+    <string name="subject_mobile">Programación de Dispositivos Móviles</string>
+    <string name="subject_database">Base de Datos II</string>
+    <string name="subject_software">Ingeniería de Software</string>
+    <string name="subject_networks">Redes de Computadoras</string>
+
+    <string name="sample_task_1">Preparar exposición de RecyclerView</string>
+    <string name="sample_task_2">Implementar navegación con Fragments</string>
+    <string name="sample_task_3">Entregar informe de base de datos</string>
+    <string name="sample_task_4">Revisar diagramas UML</string>
+    <string name="sample_task_5">Configurar práctica de redes</string>
+    <string name="sample_task_6">Ensayar defensa técnica</string>
+    <string name="sample_task_7">Corregir pruebas unitarias</string>
+    <string name="sample_task_8">Documentar componentes Android</string>
+
+    <string name="sample_date_1" translatable="false">21/09/2026</string>
+    <string name="sample_date_2" translatable="false">22/09/2026</string>
+    <string name="sample_date_3" translatable="false">24/09/2026</string>
+    <string name="sample_date_4" translatable="false">26/09/2026</string>
+    <string name="sample_date_5" translatable="false">28/09/2026</string>
+    <string name="sample_date_6" translatable="false">30/09/2026</string>
+    <string name="sample_date_7" translatable="false">02/10/2026</string>
+    <string name="sample_date_8" translatable="false">05/10/2026</string>
+    <string name="default_new_task_date" translatable="false">28/09/2026</string>
+
+    <string name="calendar_title">Calendario académico</string>
+    <string name="calendar_body">Consulta las próximas entregas desde la lista de tareas.</string>
+    <string name="calendar_next_delivery">Próxima entrega: 21 de septiembre</string>
+    <string name="profile_title">Equipo de trabajo</string>
+    <string name="profile_brita">Brita Varinia Perez Villegas · Conductora</string>
+    <string name="profile_carlos">Carlos Andres Flores Carpio · Navegante</string>
+    <string name="profile_body">Práctica 3.8 · RecyclerView, Intents y Fragments</string>
+
+    <string name="notification_channel_name">Tareas de prioridad alta</string>
+    <string name="notification_channel_description">Avisos para nuevas tareas académicas urgentes</string>
+    <string name="notification_title">Nueva tarea prioritaria</string>
+    <string name="notification_body">%1$s · %2$s</string>
 </resources>
