@@ -4,8 +4,8 @@
 
 - Asignatura: Programación de Dispositivos Móviles
 - Proyecto: MiAgenda INTJEM
-- Integrante 1: **Brita Varinia Perez Villegas**
-- Integrante 2: **Carlos Andres Flores Carpio**
+- Integrante 1: **Brita Varinia Perez Villegas** — Registro universitario: `(completar)`
+- Integrante 2: **Carlos Andres Flores Carpio** — Registro universitario: `(completar)`
 - Fecha de entrega: **21 de septiembre de 2026**
 
 ## Roles invertidos
@@ -104,7 +104,7 @@ El Intent para compartir es implícito porque describe una acción (`ACTION_SEND
 
 ## AP-3.8.1 — Lista eficiente de tareas
 
-Se implementó el modelo `Tarea` con los campos obligatorios `id`, `titulo`, `materia`, `fechaEntrega` y `prioridad`. La prioridad es un `enum` que asocia cada valor con su etiqueta y color mediante recursos.
+Se implementó el modelo `Tarea` con los campos obligatorios `id`, `titulo`, `materia`, `fechaEntrega` y `prioridad`. Tanto `materia` como `prioridad` son `enum`: cada valor guarda su identidad y delega la etiqueta visible —y, en el caso de la prioridad, también el color— a recursos. Así una tarea sigue siendo la misma aunque cambie el idioma del dispositivo.
 
 La pantalla carga ocho tareas de ejemplo y configura:
 
@@ -118,6 +118,72 @@ La pantalla carga ocho tareas de ejemplo y configura:
 - avisos granulares al Adapter, sin `notifyDataSetChanged`.
 
 El ID estable de cada tarea separa la identidad del objeto de la posición visible. Esta distinción es necesaria porque el filtro cambia posiciones y porque una eliminación desplaza los elementos siguientes.
+
+### Fragmentos de código relevantes
+
+El adaptador infla la vista una sola vez por `ViewHolder` y `onBindViewHolder` se limita a
+enlazar datos. Esta separación es justamente el criterio de rechazo de la consigna:
+
+```java
+@NonNull
+@Override
+public TareaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View itemView = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.item_tarea, parent, false);
+    return new TareaViewHolder(itemView);
+}
+
+@Override
+public void onBindViewHolder(@NonNull TareaViewHolder holder, int position) {
+    holder.bind(tasks.get(position));
+}
+```
+
+Los listeners se registran una vez en el constructor del `ViewHolder`, no en cada enlace, y
+consultan la posición en el momento del evento:
+
+```java
+TareaViewHolder(@NonNull View itemView) {
+    super(itemView);
+    titleText = itemView.findViewById(R.id.taskTitleText);
+    // ...
+    itemView.setOnClickListener(view -> {
+        int position = getBindingAdapterPosition();
+        if (position != RecyclerView.NO_POSITION) {
+            listener.onTareaClick(tasks.get(position), position);
+        }
+    });
+}
+```
+
+`getBindingAdapterPosition()` puede devolver `NO_POSITION` mientras hay una animación de
+inserción o borrado en curso. Comprobarlo evita actuar sobre una fila que ya no existe.
+
+`item_tarea.xml` usa `MaterialCardView` como raíz y no contiene un solo valor literal:
+
+```xml
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/screen_margin"
+    app:cardCornerRadius="@dimen/corner_medium"
+    app:cardElevation="@dimen/task_card_elevation"
+    app:strokeColor="?attr/colorOutline">
+    <!-- indicador de prioridad + título, materia y fecha -->
+</com.google.android.material.card.MaterialCardView>
+```
+
+El alta notifica una sola fila en lugar de reconstruir la lista completa:
+
+```java
+Tarea added = agendaActivity().createTask(title, subject, dueDate, priority);
+if (matchesCurrentFilter(added)) {
+    int position = visibleTasks.size();
+    visibleTasks.add(added);
+    adapter.notifyItemInserted(position);
+    taskList.scrollToPosition(position);
+}
+```
 
 <img src="captures/3.8/tasks-main.png" alt="Lista principal con RecyclerView" width="270">
 
@@ -136,6 +202,60 @@ El diálogo valida que título y fecha no estén vacíos. Al guardar se agrega u
 | Detalle editable | Selector de Android para compartir |
 |---|---|
 | <img src="captures/3.8/task-detail.png" alt="Detalle editable de una tarea" width="250"> | <img src="captures/3.8/share-chooser.png" alt="Intent implícito de compartir" width="250"> |
+
+### Fragmentos de código relevantes
+
+Intent **explícito**: nombra la clase de destino y adjunta la `Tarea` como `Parcelable`.
+
+```java
+int sourcePosition = agendaActivity().findTaskIndex(task.getId());
+Intent intent = new Intent(requireContext(), DetalleTareaActivity.class)
+        .putExtra(DetalleTareaActivity.EXTRA_TAREA, task)
+        .putExtra(DetalleTareaActivity.EXTRA_POSICION, sourcePosition);
+detailLauncher.launch(intent);
+```
+
+Intent **implícito**: describe una acción y un tipo, nunca una clase. El sistema ofrece las
+aplicaciones capaces de atenderla.
+
+```java
+Intent shareIntent = new Intent(Intent.ACTION_SEND)
+        .setType("text/plain")
+        .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject, visibleTitle))
+        .putExtra(Intent.EXTRA_TEXT, body);
+
+startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
+```
+
+Retorno del resultado con `ActivityResultLauncher`, registrado en `onCreate` del Fragment
+para respetar el ciclo de vida. La lista se refresca por identidad, no por posición:
+
+```java
+Tarea updated = IntentCompat.getParcelableExtra(
+        result.getData(), DetalleTareaActivity.EXTRA_TAREA, Tarea.class);
+
+agendaActivity().updateTask(updated);
+int visiblePosition = findVisiblePosition(updated.getId());
+if (visiblePosition >= 0 && adapter != null) {
+    visibleTasks.set(visiblePosition, updated);
+    adapter.notifyItemChanged(visiblePosition);
+}
+```
+
+Reemplazo de Fragments. La transacción inicial solo ocurre en el primer arranque; si
+`savedInstanceState` no es nulo, `FragmentManager` ya restauró la sección:
+
+```java
+if (savedInstanceState == null) {
+    navigation.getMenu().findItem(R.id.nav_tasks).setChecked(true);
+    showSection(R.id.nav_tasks);
+}
+// ...
+getSupportFragmentManager()
+        .beginTransaction()
+        .replace(R.id.fragmentContainer, target)
+        .commit();
+```
 
 `MainActivity` contiene una `MaterialToolbar`, un contenedor de Fragments y un `BottomNavigationView`. Las opciones Tareas, Calendario y Perfil reemplazan el contenido mediante `FragmentManager`. El menú de la Toolbar expone “Acerca de”. La transacción inicial solo se realiza cuando `savedInstanceState` es nulo; así no se superpone un Fragment nuevo al que Android acaba de restaurar.
 
@@ -182,6 +302,8 @@ La aplicación crea un canal con importancia alta desde `MiAgendaApplication`. E
 | Toolbar y menú | `menu_main.xml` | Cumple |
 | Estado después de rotación | Captura horizontal y jerarquía de UI | Cumple |
 | Filtro y notificación opcionales | Pruebas en el emulador | Cumple |
+| Filtro correcto tras cambio de idioma | `enum Materia` y prueba con `cmd locale set-app-locales` | Cumple |
+| Permiso de notificaciones pedido una sola vez | Marca conservada en `MainActivity` | Cumple |
 | Compilación y Lint | `assembleDebug` y `lintDebug` | Cumple, cero hallazgos |
 
 ## Dificultades y resolución
@@ -189,6 +311,20 @@ La aplicación crea un canal con importancia alta desde `MiAgendaApplication`. E
 - La primera dificultad fue conservar una única fuente de tareas mientras los Fragments se reemplazaban. Si cada Fragment creaba su propia lista, una edición desaparecía al cambiar de sección. Se alojó la colección en `MainActivity` y el Fragment trabaja con una proyección filtrada.
 - El filtro hacía incorrecto usar directamente la posición visible para editar o borrar. Se añadió un ID estable y todas las operaciones buscan la tarea por identidad; la posición se usa únicamente para notificar al Adapter qué fila visible cambió.
 - La rotación podía volver a cargar las ocho muestras cuando la lista restaurada estaba vacía. Se distinguió el primer arranque (`savedInstanceState == null`) de una restauración válida, incluso si contiene cero elementos.
+- La revisión final destapó un fallo que la compilación no detecta. `Tarea` guardaba la
+  materia como el texto ya traducido que devolvía `getString`, y el filtro comparaba ese
+  texto con la etiqueta seleccionada en el `Spinner`. Mientras el idioma no cambiara, todo
+  funcionaba. Al cambiar el idioma con la aplicación abierta, el `Spinner` pasaba a inglés
+  y las tareas conservaban las materias en español: filtrar por «Mobile Device
+  Programming» devolvía cero tarjetas cuando había cuatro. Se comprobó en el emulador con
+  `cmd locale set-app-locales`. La solución fue introducir el `enum Materia`, simétrico a
+  `Prioridad`: la tarea guarda el valor y la etiqueta se resuelve al pintar. La misma
+  prueba después del cambio devuelve las cuatro tarjetas. La lección es que un identificador
+  nunca debe ser una cadena visible, porque las cadenas visibles dependen de la configuración.
+- El permiso de notificaciones se solicitaba en `onViewCreated`. Como el Fragment se recrea
+  al cambiar de sección y al rotar, el diálogo reaparecía una y otra vez. La marca de
+  «permiso ya solicitado» se trasladó a `MainActivity` y se conserva en su `Bundle`, de modo
+  que se pide una sola vez por ejecución.
 - Las notificaciones cambian según la versión de Android. Se creó el canal desde API 26 y se solicita permiso solo desde API 33. Si el usuario lo rechaza, la agenda continúa funcionando.
 - Durante la validación fue necesario diferenciar que un Fragment conserva su instancia y que su vista puede destruirse. Se desacopló el Adapter en `onDestroyView` y se anularon referencias para evitar retener la vista anterior.
 
@@ -205,4 +341,34 @@ La aplicación se verificó en el AVD `MiAgenda_API_34`, perfil Pixel 6, Android
 git log --oneline --decorate
 ```
 
-Las dos guías originales se copiaron en `docs/`. No se configuró un repositorio remoto ni se atribuyeron commits a identidades ajenas: el historial local registra los cambios técnicos reales y queda listo para que el equipo lo publique en su repositorio de entrega.
+Las dos guías originales se copiaron en `docs/`.
+
+### Enlace al repositorio
+
+El punto 7 de la estructura del informe exige un enlace al repositorio con el historial de
+commits visible, incluyendo la guía del punto 3.7.
+
+- **URL del repositorio:** `(completar al publicar)`
+
+El historial local ya cumple la condición de contener ambas guías:
+
+```
+docs: complete practice 3.8 report
+feat: implement Android practice 3.8
+docs: complete practice 3.7 report
+docs: add emulator validation evidence
+chore: avoid pinning local Gradle JDK
+feat: implement Android practice 3.7
+```
+
+No se configuró un repositorio remoto ni se atribuyeron commits a identidades ajenas: el
+historial registra los cambios técnicos reales. Para publicarlo basta con crear el
+repositorio vacío en el servicio elegido y ejecutar:
+
+```bash
+git remote add origin <url-del-repositorio>
+git push -u origin main
+```
+
+Publicar antes de la entrega es obligatorio, porque la consigna evalúa el historial visible
+y no solo el código.
