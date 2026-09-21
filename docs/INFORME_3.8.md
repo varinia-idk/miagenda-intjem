@@ -348,7 +348,7 @@ Las dos guías originales se copiaron en `docs/`.
 El punto 7 de la estructura del informe exige un enlace al repositorio con el historial de
 commits visible, incluyendo la guía del punto 3.7.
 
-- **URL del repositorio:** `(completar al publicar)`
+- **URL del repositorio:** `https://github.com/varinia-idk/miagenda-intjem.git`
 
 El historial cumple la condición de contener ambas guías. La rama `main` arranca con los
 cuatro commits de la práctica 3.7 y continúa con los de la 3.8, de modo que la continuidad
