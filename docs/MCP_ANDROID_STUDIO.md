@@ -1,6 +1,6 @@
 # Integración MCP con Android Studio y Codex
 
-El objetivo es que Codex pueda usar el índice, las inspecciones y las configuraciones de ejecución del IDE mediante el servidor MCP de JetBrains. La configuración se limita a este proyecto.
+El objetivo es que Codex pueda usar el índice, las inspecciones y las configuraciones de ejecución del IDE mediante el servidor MCP de JetBrains. La configuración se limita al proyecto continuado de las prácticas 3.7 y 3.8.
 
 ## Preparación
 
@@ -33,7 +33,9 @@ El 20 de septiembre de 2026 se comprobó la integración con estos resultados:
 - negociación correcta del protocolo MCP `2025-06-18`;
 - servidor identificado como `Android Studio MCP Server`, versión `Quail 4 | 2026.1.4 Patch 1`;
 - catálogo de herramientas disponible, incluidas `build_project`, `get_file_problems`, `get_project_modules`, `get_project_dependencies` y las herramientas de ejecución;
-- llamada real a `get_project_modules` completada sin error, con los módulos `MiAgendaINTJEM` y `MiAgendaINTJEM.app` reconocidos por el IDE.
+- llamada real a `get_project_modules` completada sin error, con los módulos `MiAgendaINTJEM` y `MiAgendaINTJEM.app` reconocidos por el IDE;
+- proyecto 3.8 compilado con `assembleDebug` y analizado con `lintDebug` sin hallazgos;
+- APK 3.8 instalado y recorrido en el AVD `MiAgenda_API_34`.
 
 Una sesión de Codex iniciada en el directorio padre no carga automáticamente la configuración situada en este subproyecto. Para consumir las herramientas directamente por nombre, Codex debe iniciarse de nuevo con esta carpeta como directorio de trabajo.
 
