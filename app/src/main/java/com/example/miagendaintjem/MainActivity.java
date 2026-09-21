@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.os.BundleCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.miagendaintjem.model.Materia;
 import com.example.miagendaintjem.model.Prioridad;
 import com.example.miagendaintjem.model.Tarea;
 import com.example.miagendaintjem.ui.CalendarFragment;
@@ -26,9 +27,12 @@ import java.util.List;
 public final class MainActivity extends AppCompatActivity {
     private static final String STATE_TASKS = "state_tasks";
     private static final String STATE_NEXT_ID = "state_next_id";
+    private static final String STATE_NOTIFICATION_PERMISSION_REQUESTED =
+            "state_notification_permission_requested";
 
     private final ArrayList<Tarea> tasks = new ArrayList<>();
     private int nextTaskId = 1;
+    private boolean notificationPermissionRequested;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +49,11 @@ public final class MainActivity extends AppCompatActivity {
             loadSampleTasks();
             return;
         }
+
+        notificationPermissionRequested = savedInstanceState.getBoolean(
+                STATE_NOTIFICATION_PERMISSION_REQUESTED,
+                false
+        );
 
         ArrayList<Tarea> restored = BundleCompat.getParcelableArrayList(
                 savedInstanceState,
@@ -129,7 +138,7 @@ public final class MainActivity extends AppCompatActivity {
     @NonNull
     public Tarea createTask(
             @NonNull String title,
-            @NonNull String subject,
+            @NonNull Materia subject,
             @NonNull String dueDate,
             @NonNull Prioridad priority
     ) {
@@ -154,6 +163,14 @@ public final class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean hasRequestedNotificationPermission() {
+        return notificationPermissionRequested;
+    }
+
+    public void markNotificationPermissionRequested() {
+        notificationPermissionRequested = true;
+    }
+
     public int findTaskIndex(int taskId) {
         for (int index = 0; index < tasks.size(); index++) {
             if (tasks.get(index).getId() == taskId) {
@@ -167,6 +184,10 @@ public final class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList(STATE_TASKS, new ArrayList<>(tasks));
         outState.putInt(STATE_NEXT_ID, nextTaskId);
+        outState.putBoolean(
+                STATE_NOTIFICATION_PERMISSION_REQUESTED,
+                notificationPermissionRequested
+        );
         super.onSaveInstanceState(outState);
     }
 
@@ -174,56 +195,56 @@ public final class MainActivity extends AppCompatActivity {
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_1),
-                getString(R.string.subject_mobile),
+                Materia.MOVILES,
                 getString(R.string.sample_date_1),
                 Prioridad.ALTA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_2),
-                getString(R.string.subject_mobile),
+                Materia.MOVILES,
                 getString(R.string.sample_date_2),
                 Prioridad.ALTA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_3),
-                getString(R.string.subject_database),
+                Materia.BASE_DATOS,
                 getString(R.string.sample_date_3),
                 Prioridad.MEDIA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_4),
-                getString(R.string.subject_software),
+                Materia.SOFTWARE,
                 getString(R.string.sample_date_4),
                 Prioridad.BAJA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_5),
-                getString(R.string.subject_networks),
+                Materia.REDES,
                 getString(R.string.sample_date_5),
                 Prioridad.MEDIA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_6),
-                getString(R.string.subject_mobile),
+                Materia.MOVILES,
                 getString(R.string.sample_date_6),
                 Prioridad.ALTA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_7),
-                getString(R.string.subject_software),
+                Materia.SOFTWARE,
                 getString(R.string.sample_date_7),
                 Prioridad.BAJA
         ));
         tasks.add(new Tarea(
                 nextTaskId++,
                 getString(R.string.sample_task_8),
-                getString(R.string.subject_mobile),
+                Materia.MOVILES,
                 getString(R.string.sample_date_8),
                 Prioridad.MEDIA
         ));

@@ -26,6 +26,7 @@ import com.example.miagendaintjem.DetalleTareaActivity;
 import com.example.miagendaintjem.MainActivity;
 import com.example.miagendaintjem.R;
 import com.example.miagendaintjem.adapter.TareaAdapter;
+import com.example.miagendaintjem.model.Materia;
 import com.example.miagendaintjem.model.Prioridad;
 import com.example.miagendaintjem.model.Tarea;
 import com.example.miagendaintjem.notifications.NotificationHelper;
@@ -181,12 +182,20 @@ public final class TasksFragment extends Fragment
         }
     }
 
+    /**
+     * Position 0 of {@code R.array.subject_filters} means "all subjects"; the
+     * remaining positions follow the declaration order of {@link Materia}.
+     * Comparing subjects by value and not by their visible label keeps the
+     * filter working after the device language changes.
+     */
     private boolean matchesCurrentFilter(@NonNull Tarea task) {
-        if (selectedFilterPosition == 0 || filterSpinner == null) {
+        if (selectedFilterPosition == 0) {
             return true;
         }
-        Object selected = filterSpinner.getSelectedItem();
-        return selected != null && task.getMateria().contentEquals(selected.toString());
+
+        int subjectIndex = selectedFilterPosition - 1;
+        Materia[] subjects = Materia.values();
+        return subjectIndex < subjects.length && task.getMateria() == subjects[subjectIndex];
     }
 
     @Override
@@ -267,7 +276,8 @@ public final class TasksFragment extends Fragment
                                 return;
                             }
 
-                            String subject = subjectSpinner.getSelectedItem().toString();
+                            Materia subject =
+                                    Materia.values()[subjectSpinner.getSelectedItemPosition()];
                             Prioridad priority =
                                     Prioridad.values()[prioritySpinner.getSelectedItemPosition()];
                             addTask(title, subject, date, priority);
@@ -291,7 +301,7 @@ public final class TasksFragment extends Fragment
 
     private void addTask(
             @NonNull String title,
-            @NonNull String subject,
+            @NonNull Materia subject,
             @NonNull String dueDate,
             @NonNull Prioridad priority
     ) {
@@ -327,16 +337,27 @@ public final class TasksFragment extends Fragment
         return RecyclerView.NO_POSITION;
     }
 
+    /**
+     * Asks for the notification permission at most once per MainActivity instance.
+     * The Fragment is recreated on every section change, so the flag lives in the
+     * Activity and is kept across configuration changes.
+     */
     private void requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                && ContextCompat.checkSelfPermission(
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return;
+        }
+        if (agendaActivity().hasRequestedNotificationPermission()) {
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.POST_NOTIFICATIONS
-        ) != PackageManager.PERMISSION_GRANTED) {
-            notificationPermissionLauncher.launch(
-                    Manifest.permission.POST_NOTIFICATIONS
-            );
+        ) == PackageManager.PERMISSION_GRANTED) {
+            return;
         }
+
+        agendaActivity().markNotificationPermissionRequested();
+        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
     }
 
     @NonNull

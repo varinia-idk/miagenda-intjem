@@ -95,7 +95,9 @@ public final class TareaAdapter
 
         void bind(@NonNull Tarea task) {
             titleText.setText(task.getTitulo());
-            subjectText.setText(task.getMateria());
+            subjectText.setText(itemView.getContext().getString(
+                    task.getMateria().getLabelRes()
+            ));
             dueDateText.setText(itemView.getContext().getString(
                     R.string.task_due_date_format,
                     task.getFechaEntrega()

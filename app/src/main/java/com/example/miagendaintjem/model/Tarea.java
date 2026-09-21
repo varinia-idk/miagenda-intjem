@@ -10,7 +10,7 @@ public final class Tarea implements Parcelable {
     @NonNull
     private final String titulo;
     @NonNull
-    private final String materia;
+    private final Materia materia;
     @NonNull
     private final String fechaEntrega;
     @NonNull
@@ -19,7 +19,7 @@ public final class Tarea implements Parcelable {
     public Tarea(
             int id,
             @NonNull String titulo,
-            @NonNull String materia,
+            @NonNull Materia materia,
             @NonNull String fechaEntrega,
             @NonNull Prioridad prioridad
     ) {
@@ -33,7 +33,8 @@ public final class Tarea implements Parcelable {
     private Tarea(@NonNull Parcel source) {
         id = source.readInt();
         titulo = valueOrEmpty(source.readString());
-        materia = valueOrEmpty(source.readString());
+        String subjectName = source.readString();
+        materia = subjectName == null ? Materia.MOVILES : Materia.valueOf(subjectName);
         fechaEntrega = valueOrEmpty(source.readString());
 
         String priorityName = source.readString();
@@ -56,7 +57,7 @@ public final class Tarea implements Parcelable {
     }
 
     @NonNull
-    public String getMateria() {
+    public Materia getMateria() {
         return materia;
     }
 
@@ -84,7 +85,7 @@ public final class Tarea implements Parcelable {
     public void writeToParcel(@NonNull Parcel destination, int flags) {
         destination.writeInt(id);
         destination.writeString(titulo);
-        destination.writeString(materia);
+        destination.writeString(materia.name());
         destination.writeString(fechaEntrega);
         destination.writeString(prioridad.name());
     }

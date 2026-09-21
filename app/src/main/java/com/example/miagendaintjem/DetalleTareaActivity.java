@@ -68,7 +68,7 @@ public final class DetalleTareaActivity extends AppCompatActivity {
         titleInput.setText(task.getTitulo());
         subjectText.setText(getString(
                 R.string.detail_subject_format,
-                task.getMateria()
+                getString(task.getMateria().getLabelRes())
         ));
         dueDateText.setText(getString(
                 R.string.detail_due_date_format,
@@ -111,7 +111,7 @@ public final class DetalleTareaActivity extends AppCompatActivity {
         String body = getString(
                 R.string.share_body,
                 visibleTitle,
-                task.getMateria(),
+                getString(task.getMateria().getLabelRes()),
                 task.getFechaEntrega(),
                 getString(task.getPrioridad().getLabelRes())
         );
