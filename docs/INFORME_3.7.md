@@ -82,7 +82,9 @@ Archivos principales:
 - `app/src/main/res/layout/activity_main.xml`
 - `app/src/main/java/com/example/miagendaintjem/MainActivity.java`
 
-**Captura vertical:** [insertar captura del emulador]
+**Captura vertical en español (Android 14, API 34):**
+
+<img src="captures/portrait-light-es.png" alt="Pantalla principal vertical en español" width="260">
 
 ## AP-3.7.2 — Adaptabilidad
 
@@ -94,7 +96,18 @@ La aplicación delega toda adaptación al sistema de recursos:
 - `values-sw600dp/dimens.xml` amplía márgenes, espaciado, imagen y tipografía en tablet.
 - `drawable/ic_agenda.xml` conserva nitidez porque se rasteriza de nuevo para cada densidad.
 
-**Capturas requeridas:** [vertical], [horizontal], [inglés], [modo oscuro] y [tablet].
+### Evidencia de adaptabilidad
+
+Las imágenes siguientes se capturaron desde el mismo APK, sin cambiar código Java entre pruebas. Android seleccionó los recursos según idioma, orientación, modo nocturno y ancho mínimo disponible.
+
+| Variante | Recurso alternativo comprobado | Evidencia |
+|---|---|---|
+| Horizontal | `layout-land/activity_main.xml` | <img src="captures/landscape-light-en.png" alt="Pantalla horizontal" width="420"> |
+| Inglés | `values-en/strings.xml` | <img src="captures/portrait-light-en.png" alt="Pantalla vertical en inglés" width="220"> |
+| Modo oscuro | `values-night/colors.xml` | <img src="captures/portrait-dark-en.png" alt="Pantalla en modo oscuro" width="220"> |
+| Tablet | `values-sw600dp/dimens.xml` | <img src="captures/tablet-light-es.png" alt="Pantalla con recursos para tablet" width="260"> |
+
+La prueba tablet usó temporalmente `1600 × 2560 px` a `320 dpi`. Android informó `sw800dp`, por lo que la selección de `values-sw600dp` quedó verificada. Al finalizar se restauró el Pixel 6 a su tamaño físico de `1080 × 2400 px` y `420 dpi`.
 
 ## AC-3.7.3 — Sistema de diseño Material 3
 
@@ -111,8 +124,9 @@ Nombrar por rol conserva el significado cuando cambia el valor. `md_surface` sig
 
 ## Dificultades y resolución
 
-- **[Completar con dificultades reales de la pareja.]**
+- **[Completar con alguna dificultad de coordinación o aprendizaje de la pareja.]**
 - La discrepancia de nombre entre las guías 3.7 y 3.8 se resolvió usando `MiAgendaINTJEM`, que es el nombre exigido por la actividad donde se crea el proyecto. El nombre visible permanece externalizado para poder corregirlo sin tocar layouts ni Java.
+- El SDK no tenía una imagen virtual instalada. Se añadieron las herramientas oficiales de línea de comandos y la imagen Google APIs de Android 14 para `arm64-v8a`; así se pudo validar el APK de forma nativa en Apple Silicon.
 
 ## Conclusiones individuales
 
@@ -122,3 +136,5 @@ Nombrar por rol conserva el significado cuando cambia el valor. `md_surface` sig
 ## Anexo
 
 Los archivos `colors.xml`, `dimens.xml` y `strings.xml` se encuentran en `app/src/main/res/values/` y deben anexarse impresos o exportados al informe final.
+
+La ejecución se verificó en el AVD `MiAgenda_API_34`, perfil Pixel 6, Android 14/API 34, Google APIs y ABI `arm64-v8a`. El APK de depuración se instaló correctamente y `MainActivity` completó un inicio en frío.

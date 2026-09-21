@@ -15,8 +15,10 @@ Aplicación Android en Java que demuestra el uso del sistema de recursos de Andr
 
 1. Abre la carpeta raíz de este proyecto en Android Studio.
 2. Espera a que finalice Gradle Sync.
-3. Selecciona un dispositivo físico o crea un emulador con API 24 o superior.
+3. Selecciona `MiAgenda_API_34` en Device Manager.
 4. Ejecuta la configuración `app`.
+
+El entorno local ya incluye el AVD `MiAgenda_API_34`: Pixel 6, Android 14/API 34, Google APIs y `arm64-v8a`. Esta arquitectura ejecuta el emulador de forma nativa en Apple Silicon y coincide con el `targetSdk 34` solicitado por la guía.
 
 ## Verificación desde terminal
 
@@ -26,5 +28,7 @@ Aplicación Android en Java que demuestra el uso del sistema de recursos de Andr
 ```
 
 La documentación académica, la configuración de MCP y las consignas originales están en [`docs/`](docs/).
+
+Las capturas verificadas del emulador están en [`docs/captures/`](docs/captures/); cubren español, inglés, orientación horizontal, modo oscuro y recursos para tablet.
 
 `targetSdk` permanece en 34 porque es un requisito expreso de la guía. El proyecto usa Gradle 9.6.0 porque es la versión predeterminada y compatible indicada para AGP 9.4.1; Lint omite únicamente las sugerencias de cambiar esas dos versiones.
