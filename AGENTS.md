@@ -1,7 +1,9 @@
 # Project instructions
 
 - Use Java for application code and XML Views for UI.
-- Keep code, identifiers, comments, and commit messages in English.
+- Keep code, identifiers, and comments in English.
+- Write commit messages in Spanish, matching this repository's history and the
+  language of the submitted report.
 - Keep user-facing text in Android string resources and provide Spanish and English variants.
 - Do not add UI literals to layout files; use resources for text, colors, dimensions, and drawables.
 - Preserve the same view IDs in every `activity_main.xml` configuration variant.

@@ -27,6 +27,11 @@ El entorno local ya incluye el AVD `MiAgenda_API_34`: Pixel 6, Android 14/API 34
 ./gradlew lintDebug
 ```
 
+## Ubicación en el repositorio
+
+Este proyecto vive en la rama `practica-3.7`. La rama `main` contiene la práctica 3.8,
+que continúa este mismo proyecto incorporando `RecyclerView`, Intents y Fragments.
+
 La documentación académica, la configuración de MCP y las consignas originales están en [`docs/`](docs/).
 
 Las capturas verificadas del emulador están en [`docs/captures/`](docs/captures/); cubren español, inglés, orientación horizontal, modo oscuro y recursos para tablet.
