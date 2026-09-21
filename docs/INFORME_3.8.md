@@ -350,25 +350,28 @@ commits visible, incluyendo la guía del punto 3.7.
 
 - **URL del repositorio:** `(completar al publicar)`
 
-El historial local ya cumple la condición de contener ambas guías:
+El historial cumple la condición de contener ambas guías. La rama `main` arranca con los
+cuatro commits de la práctica 3.7 y continúa con los de la 3.8, de modo que la continuidad
+entre ambas queda registrada y no solo declarada:
 
 ```
-docs: complete practice 3.8 report
-feat: implement Android practice 3.8
-docs: complete practice 3.7 report
-docs: add emulator validation evidence
-chore: avoid pinning local Gradle JDK
-feat: implement Android practice 3.7
+feat: implementar práctica 3.7 de Android
+chore: evitar fijar el JDK local de Gradle
+docs: añadir evidencia de validación en emulador
+docs: completar reporte de la práctica 3.7
+... continúan los commits de la práctica 3.8
 ```
 
-No se configuró un repositorio remoto ni se atribuyeron commits a identidades ajenas: el
-historial registra los cambios técnicos reales. Para publicarlo basta con crear el
-repositorio vacío en el servicio elegido y ejecutar:
+El historial completo se revisa con:
 
 ```bash
-git remote add origin <url-del-repositorio>
-git push -u origin main
+git log --oneline --decorate --reverse
 ```
 
-Publicar antes de la entrega es obligatorio, porque la consigna evalúa el historial visible
-y no solo el código.
+La rama `practica-3.7` conserva el proyecto tal como se entregó en la guía anterior, con su
+pantalla única y sus calificadores de configuración. La rama `main` contiene la aplicación
+de la guía 3.8, que es la versión ejecutable de esta entrega.
+
+No se atribuyeron commits a identidades ajenas: cada commit registra al integrante que
+realizó efectivamente el cambio. Publicar el repositorio antes de la entrega es obligatorio,
+porque la consigna evalúa el historial visible y no solo el código.
