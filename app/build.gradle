@@ -5,11 +5,7 @@ plugins {
 android {
     namespace = 'com.example.miagendaintjem'
 
-    compileSdk {
-        version = release(37) {
-            minorApiLevel = 0
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = 'com.example.miagendaintjem'
@@ -41,7 +37,7 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
-    implementation 'androidx.core:core:1.19.0'
+    implementation 'androidx.core:core:1.17.0'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
     implementation 'com.google.android.material:material:1.14.0'
 }
